@@ -138,7 +138,7 @@ model_list = ['IPSL-CM5A-LR', 'GFDL-ESM2M', 'HadGEM2-ES', 'MIROC5']
 scenario_list = ['rcp26', 'rcp45', 'rcp60', 'rcp85']
 
 # full path to the directory to write the files to
-output_dir = '/Users/d3y010/Desktop/cas'
+output_dir = '<your dir>'
 
 # full path to the directory containing the Cassandra configuration files
 cassandra_config_dir = '<your dir>'
