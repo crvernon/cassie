@@ -6,54 +6,29 @@ model_list = ['IPSL-CM5A-LR', 'GFDL-ESM2M', 'HadGEM2-ES', 'MIROC5']
 # scenarios to process
 scenario_list = ['rcp26', 'rcp45', 'rcp60', 'rcp85']
 
-#
+# full path to the directory to write the files to
 output_dir = '/Users/d3y010/Desktop/cas'
 
-#
-runs_per_config = 4
+# full path to the directory containing the Cassandra configuration files
+cassandra_config_dir = '<your dir>'
 
-#
-global_model_interface_jar = '<your path>'
+# full path to the directory to write cassandra log files to
+cassandra_log_dir = '<your dir'
 
-#
-global_dbxml_lib = '<your path>'
+# full path with file name and extension to the "cassandra_main.py" file
+cassandra_main_script = '<your dir>'
 
-#
-xanthos_config_dir = '<your dir>'
-
-#
-xanthos_pet_model_abbrev = 'trn'
-
-#
-xanthos_runoff_model_abbrev = 'abcd'
-
-#
-fldgen_startyr = 1861
-
-#
-fldgen_throughyr = 2099
-
-#
-fldgen_pkgdir = '.'
-
-#
-fldgen_emulator_dir = '<your dir>'
-
-#
-fldgen_tgav_file_dir = '<your dir>'
-
-# construct the cassandra configuration files
-cassie.build_cassandra_configs(model_list=model_list,
-                               scenario_list=scenario_list,
-                               output_dir=output_dir,
-                               runs_per_config=runs_per_config,
-                               global_model_interface_jar=global_model_interface_jar,
-                               global_dbxml_lib=global_dbxml_lib,
-                               xanthos_config_dir=xanthos_config_dir,
-                               xanthos_pet_model_abbrev=xanthos_pet_model_abbrev,
-                               xanthos_runoff_model_abbrev=xanthos_runoff_model_abbrev,
-                               fldgen_startyr=fldgen_startyr,
-                               fldgen_throughyr=fldgen_throughyr,
-                               fldgen_pkgdir=fldgen_pkgdir,
-                               fldgen_emulator_dir=fldgen_emulator_dir,
-                               fldgen_tgav_file_dir=fldgen_tgav_file_dir)
+# construct the cassandra slurm scripts
+cassie.build_job_scripts(model_list=model_list,
+                         scenario_list=scenario_list,
+                         output_dir=output_dir,
+                         cassandra_config_dir=cassandra_config_dir,
+                         cassandra_log_dir=cassandra_log_dir,
+                         cassandra_main_script=cassandra_main_script,
+                         sbatch_account='<your account>',
+                         sbatch_partition='slurm',
+                         sbatch_walltime='01:00:00',
+                         sbatch_ntasks=3,
+                         sbatch_nodes=3,
+                         sbatch_jobname='cassie',
+                         sbatch_logdir='<your log dir>')
