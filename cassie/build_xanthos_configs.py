@@ -54,10 +54,10 @@ def build_xanthos_configs(model_list, scenario_list, output_dir, n_configs, xant
                                         E.g., 'abcd'
     :type runoff_model_abbrev:          str
 
-    :param routing_model_abbrev:        Routing model name abbreviation that will be used in the prefix of the job name
+    :param router_model_abbrev:         Routing model name abbreviation that will be used in the prefix of the job name
                                         and the output config file name.
                                         E.g., 'mrtm'
-    :type routing_model_abbrev:         str
+    :type router_model_abbrev:          str
 
     :param template:                    Full path with filename and ini extension to an alternate template file.  The
                                         template contained in this package is used by default.

@@ -1,5 +1,5 @@
 # cassie
-Configuration builders scripts for the Cassandra coupler
+Configuration builder scripts for the Cassandra coupler
 
 ## Getting started with `cassie`
 ### Install from GitHub
@@ -124,4 +124,47 @@ cassie.build_cassandra_configs(model_list=model_list,
                                fldgen_pkgdir=fldgen_pkgdir,
                                fldgen_emulator_dir=fldgen_emulator_dir,
                                fldgen_tgav_file_dir=fldgen_tgav_file_dir)
+```
+### 3. Build Cassandra SLURM scripts
+**Note**: To see all optional parameters run `help(cassie.build_job_scripts)` after importing `cassie`
+
+```python
+import cassie
+
+# model list to process
+model_list = ['IPSL-CM5A-LR', 'GFDL-ESM2M', 'HadGEM2-ES', 'MIROC5']
+
+# scenarios to process
+scenario_list = ['rcp26', 'rcp45', 'rcp60', 'rcp85']
+
+# full path to the directory to write the files to
+output_dir = '/Users/d3y010/Desktop/cas'
+
+# full path to the directory containing the Cassandra configuration files
+cassandra_config_dir = '<your dir>'
+
+# full path to the directory to write cassandra log files to
+cassandra_log_dir = '<your dir'
+
+# full path with file name and extension to the "cassandra_main.py" file
+cassandra_main_script = '<your dir>'
+
+# construct the cassandra slurm scripts
+cassie.build_job_scripts(model_list=model_list,
+                         scenario_list=scenario_list,
+                         output_dir=output_dir,
+                         cassandra_config_dir=cassandra_config_dir,
+                         cassandra_log_dir=cassandra_log_dir,
+                         cassandra_main_script=cassandra_main_script,
+                         sbatch_account='<your account>',
+                         sbatch_partition='slurm',
+                         sbatch_walltime='01:00:00',
+                         sbatch_ntasks=3,
+                         sbatch_nodes=3,
+                         sbatch_jobname='cassie',
+                         sbatch_logdir='<your log dir>')
+```
+#### Running the SLURM scripts after generation requires the following command:
+```bash
+sbatch --array=0-<your number of realizations> <your target script>
 ```
