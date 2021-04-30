@@ -37,7 +37,7 @@ drought_thresholds_dir = "<your dir>"
 xanthos_output_variables = 'q'
 
 # abbreviation to use in the run name for the PET model
-pet_model_abbrev = 'thorn'
+pet_model_abbrev = 'trn'
 
 # abbreviation to use in the run name for the runoff model
 runoff_model_abbrev = 'abcd'

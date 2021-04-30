@@ -45,7 +45,7 @@ def build_xanthos_configs(model_list, scenario_list, output_dir, n_configs, xant
 
     :param pet_model_abbrev:            PET model name abbreviation that will be used in the prefix of the job name
                                         and the output config file name.
-                                        E.g., 'thorn'
+                                        E.g., 'trn'
     :type pet_model_abbrev:             str
 
     :param runoff_model_abbrev:         Runoff model name abbreviation that will be used in the prefix of the job name
