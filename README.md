@@ -44,6 +44,9 @@ pet_model_abbrev = 'trn'
 # abbreviation to use in the run name for the runoff model
 runoff_model_abbrev = 'abcd'
 
+# choice to generate drought stats; 0 if no, 1 if yes
+generate_drought_stats = 0
+
 # generate the configuration files
 cassie.build_xanthos_configs(model_list=model_list,
                              scenario_list=scenario_list,
@@ -54,7 +57,8 @@ cassie.build_xanthos_configs(model_list=model_list,
                              drought_thresholds_dir=drought_thresholds_dir,
                              xanthos_output_variables=xanthos_output_variables,
                              pet_model_abbrev=pet_model_abbrev,
-                             runoff_model_abbrev=runoff_model_abbrev)
+                             runoff_model_abbrev=runoff_model_abbrev,
+                             generate_drought_stats=generate_drought_stats)
 ```
 
 ### 2. Build Cassandra configuration files

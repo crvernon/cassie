@@ -4,7 +4,8 @@ import pkg_resources
 
 def build_xanthos_configs(model_list, scenario_list, output_dir, n_configs, xanthos_root_dir, xanthos_output_dir,
                           drought_thresholds_dir, xanthos_output_variables='q', pet_model_abbrev=None,
-                          runoff_model_abbrev=None, router_model_abbrev=None, template=None):
+                          runoff_model_abbrev=None, router_model_abbrev=None, template=None,
+                          generate_drought_stats=0):
     """Generate Xanthos configuration files for use in Cassandra.  A default template is used that is customized for
     running the Thornthwaite PET with the abcd runoff model to execute the drought module.  You can provide your own
     template file as well that has custom configurations.
@@ -62,6 +63,8 @@ def build_xanthos_configs(model_list, scenario_list, output_dir, n_configs, xant
                                         template contained in this package is used by default.
     :type template:                     str
 
+    :param generate_drought_stats:      1 to generate drought statistics, 0 to NOT generate
+    :type generate_drought_stats:       int
 
     """
 
@@ -79,6 +82,7 @@ def build_xanthos_configs(model_list, scenario_list, output_dir, n_configs, xant
     task_tag = '<task>'
     outdir_tag = '<outdir>'
     thresholdsdir_tag = '<thresholdsdir>'
+    droughtstats_tag = '<droughtstats>'
 
     # set run name prefix
     run_prefix = ''
@@ -119,5 +123,6 @@ def build_xanthos_configs(model_list, scenario_list, output_dir, n_configs, xant
                         fx = fx.replace(task_tag, str(i))
                         fx = fx.replace(outdir_tag, xanthos_output_dir)
                         fx = fx.replace(thresholdsdir_tag, drought_thresholds_dir)
+                        fx = fx.replace(droughtstats_tag, str(generate_drought_stats))
 
                         out.write(fx)
