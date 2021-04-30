@@ -9,6 +9,8 @@ python -m pip install git+https://github.com/crvernon/cassie.git
 
 ## Available functionality
 ### 1. Build Xanthos configuration files
+**Note**:  To see all optional parameters run `help(cassie.build_xanthos_configs)` after importing `cassie`
+
 ```python 
 import cassie
 
@@ -53,4 +55,69 @@ cassie.build_xanthos_configs(model_list=model_list,
                              xanthos_output_variables=xanthos_output_variables,
                              pet_model_abbrev=pet_model_abbrev,
                              runoff_model_abbrev=runoff_model_abbrev)
+```
+
+### 2. Build Cassandra configuration files
+**Note**:  To see all optional parameters run `help(cassie.build_cassandra_configs)` after importing `cassie`
+
+```python
+import cassie
+
+# model list to process
+model_list = ['IPSL-CM5A-LR', 'GFDL-ESM2M', 'HadGEM2-ES', 'MIROC5']
+
+# scenarios to process
+scenario_list = ['rcp26', 'rcp45', 'rcp60', 'rcp85']
+
+# full path to the directory to write the files to
+output_dir = '/Users/d3y010/Desktop/cas'
+
+# number of runs to generate per configuration setup; a.k.a. runs per realization
+runs_per_config = 4
+
+# full path with file name and extension to the GCAM model interface JAR file
+global_model_interface_jar = '<your path>'
+
+# location of the DBXML libraries used by older versions of the ModelInterface
+global_dbxml_lib = '<your path>'
+
+# directory where the Xanthos configuration files are stored
+xanthos_config_dir = '<your dir>'
+
+# PET model name abbreviation that will be used in the prefix of the job name 
+xanthos_pet_model_abbrev = 'trn'
+
+# runoff model name abbreviation that will be used in the prefix of the job name
+xanthos_runoff_model_abbrev = 'abcd'
+
+# four digit start year of the simulation
+fldgen_startyr = 1861
+
+# four digit through year of the simulation
+fldgen_throughyr = 2099
+
+# directory containing R package repositories for fldgen
+fldgen_pkgdir = '.'
+
+# directory containing the emulator files in the format: "fldgen-<model>.rds"
+fldgen_emulator_dir = '<your dir>'
+
+# directory containing the TGAV fiels in the format: "fldgen-<model>_<scenario>.csv.gz"
+fldgen_tgav_file_dir = '<your dir>'
+
+# construct the cassandra configuration files
+cassie.build_cassandra_configs(model_list=model_list,
+                               scenario_list=scenario_list,
+                               output_dir=output_dir,
+                               runs_per_config=runs_per_config,
+                               global_model_interface_jar=global_model_interface_jar,
+                               global_dbxml_lib=global_dbxml_lib,
+                               xanthos_config_dir=xanthos_config_dir,
+                               xanthos_pet_model_abbrev=xanthos_pet_model_abbrev,
+                               xanthos_runoff_model_abbrev=xanthos_runoff_model_abbrev,
+                               fldgen_startyr=fldgen_startyr,
+                               fldgen_throughyr=fldgen_throughyr,
+                               fldgen_pkgdir=fldgen_pkgdir,
+                               fldgen_emulator_dir=fldgen_emulator_dir,
+                               fldgen_tgav_file_dir=fldgen_tgav_file_dir)
 ```
