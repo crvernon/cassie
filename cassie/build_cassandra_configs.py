@@ -97,6 +97,12 @@ class BuildCassandraConfigs:
                                                 "fldgen-<model>_<scenario>.csv.gz"
 
     :type fldgen_tgav_file_dir:                 str
+    
+    :param an2month_file_dir:            Directory containing fitted an2month parameters for 
+                                                temp and precip in the format:
+                                                "alpha_<model>_<scenario>.rds"
+
+    :type an2month_file_dir:             str
 
 
     """
@@ -132,6 +138,7 @@ class BuildCassandraConfigs:
         self.fldgen_pkgdir = kwargs.get('fldgen_pkgdir', '.')
         self.fldgen_emulator_dir = kwargs.get('fldgen_emulator_dir', None)
         self.fldgen_tgav_file_dir = kwargs.get('fldgen_tgav_file_dir', None)
+        self.an2month_file_dir = kwargs.get('an2month_file_dir', None)
 
     @staticmethod
     def signify32(x):
@@ -203,7 +210,7 @@ class BuildCassandraConfigs:
         config['FldgenComponent']['tgav_file'] = os.path.join(self.fldgen_tgav_file_dir, f"fldgen-{model}_{scenario}.csv.gz")
         config['FldgenComponent']['ngrids'] = self.fldgen_ngrids
         config['FldgenComponent']['scenario'] = scenario
-        config['FldgenComponent']['a2mfrac'] = f'{alpha_models[model]}'
+        config['FldgenComponent']['a2mfrac'] = os.path.join(self.an2month_file_dir, f"alpha_{model}_{scenario}.rds")
         config['FldgenComponent']['startyr'] = self.fldgen_startyr
         config['FldgenComponent']['nyear'] = self.fldgen_throughyr - self.fldgen_startyr + 1
         config['FldgenComponent']['RNGseed'] = self.signify32(crc32(config.filename.encode()))
